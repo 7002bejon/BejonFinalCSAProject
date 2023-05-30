@@ -24,4 +24,6 @@ public class GameUI extends JFrame implements ActionListener {
         StartGame newFrame = new StartGame();
 
     }
+
+
 }
