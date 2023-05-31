@@ -10,15 +10,17 @@ public class FightScreen extends JFrame implements ActionListener {
     private JPanel battleTitlePanel;
     private JButton attackButton;
     private JButton skillButton;
+    private JLabel enemyImage;
+    private JLabel statusLabel;
 
-    private Enemy e;
+    private Enemy e1;
 
     public FightScreen() {
     setContentPane(mainPanel);
     setTitle("Game");
     setSize(300, 400);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    e = new Enemy(6, 3);
+    e1 = new Enemy(6, 3);
     attackButton.addActionListener(this);
     skillButton.addActionListener(this);
     setVisible(true);
@@ -27,7 +29,8 @@ public class FightScreen extends JFrame implements ActionListener {
 @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("button pressed");
-        e.changeHp(-3);
+        e1.changeHP(-3);
+        statusLabel.setText("You attacked!");
 }
 
 }
