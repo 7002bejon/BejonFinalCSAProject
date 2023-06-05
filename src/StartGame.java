@@ -29,20 +29,21 @@ public class StartGame extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("button pressed");
+        Player p = new Player();
         if(charChoiceMage.isSelected()) {
-            Player p = new Player(5, 2, "Mage");
+            p = new Player(5, 2, "Mage");
         }
         if(charChoiceHealer.isSelected()) {
-            Player p = new Player(7, 1, "Healer");
+             p = new Player(7, 1, "Healer");
         }
         if(charChoiceWarrior.isSelected()) {
-            Player p = new Player(10, 4, "Warrior");
+             p = new Player(10, 4, "Warrior");
         }
         if(charChoiceTank.isSelected()) {
-            Player p = new Player(15, 3, "Tank");
+            p = new Player(15, 3, "Tank");
         }
         setVisible(false);
-        FightScreen newFrame = new FightScreen();
+        FightScreen newFrame = new FightScreen(p);
 
     }
 

@@ -9,6 +9,12 @@ public class Player {
         this.job = job;
     }
 
+    public Player() {
+        hp = 0;
+        attack = 0;
+        job = null;
+    }
+
     public void changeHP(int change) {
         hp += change;
     }
@@ -20,6 +26,16 @@ public class Player {
     public int getAttack() {
         return attack;
     }
+
+    public String getJob() {return job;}
+
+
+    public void setHp(int hpNew) {hp = hpNew;}
+
+    public void setAttack(int attackNew) {attack = attackNew;}
+
+    public void setJob(String jobNew) {job = jobNew;}
+
 
 
 }

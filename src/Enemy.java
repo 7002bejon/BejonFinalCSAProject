@@ -18,4 +18,6 @@ public class Enemy {
     public int getAttack() {
         return attack;
     }
+
+    public void setAttack(int attackNew) {attack = attackNew;}
 }
