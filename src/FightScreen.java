@@ -13,10 +13,17 @@ public class FightScreen extends JFrame implements ActionListener {
     private JLabel enemyImage;
     private JLabel statusLabel;
     private JLabel playerHPLabel;
+    private JButton nextTurnButton;
+
+    private boolean enemyTurn;
 
     private Enemy e1;
 
     private Player p;
+
+    private int currentHP;
+
+    private int maxHP;
 
     public FightScreen(Player p) {
     setContentPane(mainPanel);
@@ -27,12 +34,24 @@ public class FightScreen extends JFrame implements ActionListener {
     this.p = p;
     attackButton.addActionListener(this);
     skillButton.addActionListener(this);
-    int currentHP = p.getHp();
-    int maxHP = p.getHp();
+    nextTurnButton.addActionListener(this);
+    nextTurnButton.setVisible(false);
+    currentHP = p.getHp();
+    maxHP = p.getHp();
     playerHPLabel.setText("HP: " + currentHP + "/ " + maxHP + " ");
     setVisible(true);
+    enemyTurn = false;
 }
 
+
+public void enemyPhase() {
+        p.changeHP(-e1.getAttack());
+        currentHP = p.getHp();
+        playerHPLabel.setText("HP: " + currentHP + "/ " + maxHP + " ");
+        statusLabel.setText("The enemy attacked you for " + e1.getAttack() + " damage!");
+        nextTurnButton.setVisible(true);
+
+}
 @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == attackButton) {
@@ -41,6 +60,7 @@ public class FightScreen extends JFrame implements ActionListener {
             statusLabel.setText("You attacked the enemy for " + p.getAttack() + " damage!");
             attackButton.setVisible(false);
             skillButton.setVisible(false);
+            enemyPhase();
         } else if (e.getSource() == skillButton) {
             if (p.getJob().equals("Warrior")) {
                 System.out.println("button pressed");
@@ -48,6 +68,7 @@ public class FightScreen extends JFrame implements ActionListener {
                 statusLabel.setText("You used your skill! You attacked the enemy for " + (p.getAttack() + 2) + " damage!");
                 attackButton.setVisible(false);
                 skillButton.setVisible(false);
+                enemyPhase();
             } else if (p.getJob().equals("Mage")) {
                 System.out.println("button pressed");
                 e1.changeHP(p.getAttack() + 4);
@@ -55,19 +76,26 @@ public class FightScreen extends JFrame implements ActionListener {
                 p.changeHP(-1);
                 attackButton.setVisible(false);
                 skillButton.setVisible(false);
+                enemyPhase();
             } else if (p.getJob().equals("Tank")) {
                 System.out.println("button pressed");
                 e1.setAttack(e1.getAttack() - 1);
                 statusLabel.setText("You used your skill! Enemy will deal less damage!");
                 attackButton.setVisible(false);
                 skillButton.setVisible(false);
+                enemyPhase();
             } else {
                 System.out.println("button pressed");
                 p.changeHP(2);
                 statusLabel.setText("You used your skill! You healed 2 HP!");
                 attackButton.setVisible(false);
                 skillButton.setVisible(false);
+                enemyPhase();
             }
+        } else if (e.getSource() == nextTurnButton) {
+            nextTurnButton.setVisible(false);
+            attackButton.setVisible(true);
+            skillButton.setVisible(true);
         }
 }
 
